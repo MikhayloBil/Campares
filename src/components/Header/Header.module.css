@@ -1,0 +1,39 @@
+.header {
+  max-width: 1440px;
+  padding: 24px 64px 24px 64px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 136px;
+  height: 16px;
+}
+
+.buttons {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.button {
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgba(16, 24, 40, 1);
+
+  background-color: transparent;
+  border: none;
+}
+
+.button:hover {
+  color: rgba(216, 67, 67, 1);
+}
