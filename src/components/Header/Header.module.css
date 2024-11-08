@@ -1,6 +1,7 @@
 .header {
   max-width: 1440px;
   padding: 24px 64px 24px 64px;
+  margin-bottom: 48px;
 }
 
 .container {

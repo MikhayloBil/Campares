@@ -1,0 +1,97 @@
+.camperCard {
+  display: flex;
+  width: 888px;
+  height: 368px;
+  padding: 24px 24px 24px 24px;
+  gap: 24px;
+  border-radius: 20px 20px 20px 20px;
+  border: 1px solid rgba(218, 221, 225, 1);
+}
+
+.camperImage {
+  width: 292px;
+  height: 320px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.camperContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.camperName {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: left;
+  color: rgba(16, 24, 40, 1);
+  margin-bottom: 8px;
+}
+
+.camperLocation {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.camperReviewsIcon {
+  font-size: 16px;
+  color: rgba(255, 197, 49, 1);
+}
+
+.camperLocationIcon {
+  font-size: 16px;
+}
+
+.camperDescription {
+  width: 525px;
+  height: 24px;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: rgba(71, 84, 103, 1);
+  margin-bottom: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.camperFeatures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+.camperFeaturesP {
+  padding: 12px 18px 12px 18px;
+  border-radius: 100px 100px 100px 100px;
+  background: rgba(242, 244, 247, 1);
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.camperButton {
+  width: 166px;
+  height: 56px;
+  border-radius: 200px;
+  background: rgba(228, 72, 72, 1);
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.005em;
+  text-align: center;
+  color: rgba(255, 255, 255, 1);
+}
