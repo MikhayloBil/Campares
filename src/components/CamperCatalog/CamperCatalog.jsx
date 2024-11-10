@@ -1,32 +1,60 @@
 import { useEffect, useState } from "react";
-import PropTypes from "prop-types"; // Імпортуйте PropTypes для валідації
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCampers } from "../../redux/operations";
 import { setFilters } from "../../redux/slice";
 import CamperCard from "../CamperCard/CamperCard";
 import { CiMap } from "react-icons/ci";
-import { BsDiagram3, BsFuelPump, BsCupHot } from "react-icons/bs";
+import {
+  BsDiagram3,
+  BsGrid1X2,
+  BsCupHot,
+  BsTv,
+  BsGrid,
+  BsGrid3X3Gap,
+} from "react-icons/bs";
 import { LuWind } from "react-icons/lu";
+import { PiShower } from "react-icons/pi";
 import css from "./CamperCatalog.module.css";
 
-function CamperCatalog({ camper = {} }) {
+function CamperCatalog() {
   const dispatch = useDispatch();
   const campers = useSelector((state) => state.campers.list);
   const filters = useSelector((state) => state.campers.filters);
   const [visibleCampers, setVisibleCampers] = useState(4);
 
+  // Локальний стан для фільтрів
+  const [localFilters, setLocalFilters] = useState(filters);
+
   useEffect(() => {
     dispatch(fetchCampers(filters));
   }, [filters, dispatch]);
 
-  const handleFilterChange = (newFilters) => {
-    setVisibleCampers(4);
-    dispatch(setFilters(newFilters));
+  const handleFilterChange = (key, value) => {
+    setLocalFilters((prevFilters) => ({ ...prevFilters, [key]: value }));
+  };
+
+  const handleSearch = () => {
+    dispatch(setFilters(localFilters)); // Оновлюємо фільтри в Redux
+    setVisibleCampers(4); // Скидаємо кількість видимих елементів
   };
 
   const handleLoadMore = () => {
     setVisibleCampers((prevVisible) => prevVisible + 4);
   };
+
+  const vehicleFeatures = [
+    { name: "AC", icon: <LuWind />, key: "ac" },
+    { name: "Automatic", icon: <BsDiagram3 />, key: "transmission" },
+    { name: "Kitchen", icon: <BsCupHot />, key: "kitchen" },
+    { name: "Bathroom", icon: <PiShower />, key: "bathroom" },
+    { name: "TV", icon: <BsTv />, key: "tv" },
+  ];
+
+  const vehicleTypes = [
+    { name: "Van", icon: <BsGrid1X2 />, key: "van" },
+    { name: "Fully Integrated", icon: <BsGrid />, key: "fullyIntegrated" },
+    { name: "Alcove", icon: <BsGrid3X3Gap />, key: "alcove" },
+  ];
 
   return (
     <div className={css.content}>
@@ -38,69 +66,57 @@ function CamperCatalog({ camper = {} }) {
             className={css.input}
             type="text"
             placeholder="Kyiv, Ukraine"
-            value={filters.location || ""}
-            onChange={(e) =>
-              handleFilterChange({ ...filters, location: e.target.value })
-            }
+            value={localFilters.location || ""}
+            onChange={(e) => handleFilterChange("location", e.target.value)}
           />
         </div>
 
         <p className={css.camperP}>Filters</p>
+
+        {/* Vehicle Equipment */}
         <div className={css.camperFeatures}>
-          {camper.transmission && (
-            <p className={css.camperFeaturesP}>
-              <BsDiagram3 /> {camper.transmission}
-            </p>
-          )}
-          {camper.engine && (
-            <p className={css.camperFeaturesP}>
-              <BsFuelPump /> {camper.engine}
-            </p>
-          )}
-          {camper.kitchen && (
-            <p className={css.camperFeaturesP}>
-              <BsCupHot /> Kitchen
-            </p>
-          )}
-          {camper.ac && (
-            <p className={css.camperFeaturesP}>
-              <LuWind /> AC
-            </p>
-          )}
+          <h3 className={css.camperFeaturesH}>Vehicle equipment</h3>
+          <div className={css.featuresGrid}>
+            {vehicleFeatures.map((feature) => (
+              <button
+                key={feature.key}
+                className={`${css.featureButton} ${
+                  localFilters[feature.key] ? css.active : ""
+                }`}
+                onClick={() =>
+                  handleFilterChange(feature.key, !localFilters[feature.key])
+                }
+              >
+                {feature.icon} {feature.name}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              checked={filters.AC || false}
-              onChange={(e) =>
-                handleFilterChange({ ...filters, AC: e.target.checked })
-              }
-            />
-            AC
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={filters.kitchen || false}
-              onChange={(e) =>
-                handleFilterChange({ ...filters, kitchen: e.target.checked })
-              }
-            />
-            Kitchen
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={filters.bathroom || false}
-              onChange={(e) =>
-                handleFilterChange({ ...filters, bathroom: e.target.checked })
-              }
-            />
-            Bathroom
-          </label>
+        {/* Vehicle Type */}
+        <div className={css.camperFeatures}>
+          <h3 className={css.camperFeaturesH}>Vehicle type</h3>
+          <div className={css.featuresGrid}>
+            {vehicleTypes.map((feature) => (
+              <button
+                key={feature.key}
+                className={`${css.featureButton} ${
+                  localFilters[feature.key] ? css.active : ""
+                }`}
+                onClick={() =>
+                  handleFilterChange(feature.key, !localFilters[feature.key])
+                }
+              >
+                {feature.icon} {feature.name}
+              </button>
+            ))}
+          </div>
         </div>
+
+        {/* Кнопка пошуку */}
+        <button className={css.searchButton} onClick={handleSearch}>
+          Search
+        </button>
       </div>
 
       <div className={css.camperGrid}>
@@ -121,15 +137,5 @@ function CamperCatalog({ camper = {} }) {
     </div>
   );
 }
-
-// Визначте propTypes для валідації
-CamperCatalog.propTypes = {
-  camper: PropTypes.shape({
-    transmission: PropTypes.string,
-    engine: PropTypes.string,
-    kitchen: PropTypes.bool,
-    ac: PropTypes.bool,
-  }),
-};
 
 export default CamperCatalog;

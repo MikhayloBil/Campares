@@ -95,3 +95,7 @@
   text-align: center;
   color: rgba(255, 255, 255, 1);
 }
+
+.camperButton:hover {
+  background: #d84343;
+}

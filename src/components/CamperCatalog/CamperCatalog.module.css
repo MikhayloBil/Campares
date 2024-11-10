@@ -22,6 +22,10 @@
   margin: auto;
 }
 
+.camperButton:hover {
+  border: 1px solid #d84343;
+}
+
 .filterLabel {
   font-family: Inter;
   font-size: 16px;
@@ -69,5 +73,70 @@
   line-height: 24px;
   text-align: left;
   color: rgba(71, 84, 103, 1);
-  margin-bottom: 32px;
+}
+
+.camperFeaturesH {
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #101828;
+  margin-top: 32px;
+  margin-bottom: 48px;
+}
+
+.featuresGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.featureButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: white;
+  color: #101828;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  width: 112px;
+  height: 96px;
+  gap: 8px;
+}
+
+.featureButton svg {
+  font-size: 32px;
+}
+
+.featureButton.active {
+  border: 1px solid #e44848;
+}
+
+.featureButton:hover {
+  border: 1px solid #e44848;
+}
+
+.searchButton {
+  width: 166px;
+  height: 56px;
+  border-radius: 200px;
+  background: rgba(228, 72, 72, 1);
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.005em;
+  text-align: center;
+  color: rgba(255, 255, 255, 1);
+  margin-top: 40px;
+}
+
+.searchButton:hover {
+  background: #d84343;
 }
