@@ -1,0 +1,12 @@
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 зображення в ряд */
+  gap: 48px;
+}
+
+.img {
+  width: 100%; /* Щоб зображення займало весь простір */
+  height: 312px;
+  border-radius: 10px;
+  object-fit: cover;
+}

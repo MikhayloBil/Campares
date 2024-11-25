@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { fetchCampers } from "../../redux/operations";
 import { setFilters } from "../../redux/slice";
 import CamperCard from "../CamperCard/CamperCard";
@@ -121,9 +122,11 @@ function CamperCatalog() {
 
       <div className={css.camperGrid}>
         {Array.isArray(campers) && campers.length > 0 ? (
-          campers
-            .slice(0, visibleCampers)
-            .map((camper) => <CamperCard key={camper.id} camper={camper} />)
+          campers.slice(0, visibleCampers).map((camper) => (
+            <Link key={camper.id} to={`/catalog/${camper.id}`}>
+              <CamperCard camper={camper} />
+            </Link>
+          ))
         ) : (
           <p>No campers available.</p>
         )}
